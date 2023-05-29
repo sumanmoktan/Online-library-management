@@ -1,0 +1,37 @@
+{% extends 'base.html' %}
+{%load static %}
+{% block content %}
+<div>
+    <h1>Recommended Books</h1>
+</div>
+  
+{% if top_books.itertuples %}
+    <head>
+        <link rel="stylesheet" type = "text/css" href="{% static 'css/card.css' %}">
+    </head>
+    <div class="container">
+        <div class="row">
+    
+            {% for book in top_books.itertuples%}
+            <div class="card">
+                <a class='card-link' href="{{book.get_absolute_url}}">
+                    <img src="{{book.image}}">
+                    <div class="details">
+                        {{ book.title }}
+                        {% comment %} <h3>{{ book.description }}</h3> {% endcomment %}
+                        Author::{{ book.author }}
+                        <br>
+                        <a href ="/media/{{book.book_pdf}}" class = "btn btn-success">
+                            Read PDF
+                        </a> 
+                    </div>
+                </a>
+            </div>
+                
+            {% endfor %}
+        </div>
+    </div>
+{% else %}
+    <p>No book recommendations found.</p>
+{% endif %} 
+{% endblock %}

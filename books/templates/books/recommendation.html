@@ -1,0 +1,43 @@
+{% extends "base.html"%}
+{%load static%}
+
+{% block content%}
+<head>
+    <link rel="stylesheet" type = "text/css" href="{% static 'css/card.css' %}">
+</head>
+<br>
+<div class="container" style="min-height: 100vh; margin-top: -110px;">
+    <div class="row">
+        <div class="col-md-12">
+            <h1 class="text-dark" style="font-size:50px">Recommend Books</h1>
+            <form action="." method="POST">
+                {% csrf_token%}
+                <input name="user_input" type="text" class="form-control"><br>
+                <input type="submit" class="btn btn-lg btn-warning">
+            </form>
+        </div>
+        
+    {% if data%}
+
+        {% for item in data%}
+        <div class="card">
+            {% comment %} <a class='card-link' href="{{i.get_absolute_url}}"> {% endcomment %}
+                <img src="/media/{{item.image}}">
+                <div class="details">
+                    <h6>{{item.title}}</h6>
+                    <h6>Rating: {{item.avg_rating}} </h6>
+                    <a href ="/media/{{item.book_pdf}}" class = "btn btn-success">
+                        Read PDF
+                    </a>
+                    
+                </div>
+            {% comment %} </a> {% endcomment %}
+        </div>
+            
+        {% endfor %}
+
+    {% endif %}
+    </div>
+</div>
+
+{% endblock %}

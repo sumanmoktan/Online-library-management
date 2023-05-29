@@ -1,0 +1,56 @@
+
+
+
+    <aside>
+        <div class="top">
+            <div class="logo">
+                {% if request.user.is_superuser %}
+                    <h2>{{user.username}}<span class="danger"></span class="danger">(Admin)</h2>
+                {%else%}
+                    <h2>{{user.username}}<span class="danger"></span class="danger"></h2>
+                {%endif%}
+            </div>
+            <div class="close" id="btn-close">
+            <span class="material-symbols-sharp">close</span>
+            </div>
+        </div>
+
+
+        <div class="sidebar">
+            {% if request.user.is_superuser %}
+            <a href="{% url 'auth_users:admin_dashboard' %}">
+                <span class="material-symbols-sharp">grid_view</span>
+                <h3>Dashboard</h3>
+            </a>
+            {%else%}
+            <a href="{% url 'auth_users:user_dashboard' %}">
+                <span class="material-symbols-sharp">grid_view</span>
+                <h3>Dashboard</h3>
+            </a>
+            {%endif%}
+            {% if request.user.is_superuser %}
+            <a href="{% url 'auth_users:view_user' %}" class="active">
+                <span class="material-symbols-sharp">person_add</span>
+                <h3>User</h3>
+            </a>
+            {%endif%}
+            {% if request.user.is_superuser %}
+            <a href="{% url 'books:add_book' %}">
+                <span class="material-symbols-sharp">menu_book</span>
+                <h3>Add Book</h3>
+            </a>
+            {%endif%}
+
+            <a href="#">
+                <span class="material-symbols-sharp">settings</span>
+                <h3>Setting</h3>
+            </a>
+
+            {% if request.user.is_superuser %}
+            <a href="{% url 'books:view_book' %}">
+                <span class="material-symbols-sharp">menu_book</span>
+                <h3>view book</h3>
+            </a>
+            {%endif%}
+        </div>
+    </aside>

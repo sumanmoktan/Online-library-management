@@ -1,0 +1,55 @@
+{% extends 'base.html' %}
+{%load static %}
+{% block content %}
+  <h1>Pearson Correlation Recommended Books</h1>
+  {% comment %} <ul>
+    {% for book in top_books.itertuples %}
+
+      <li>{{ book.book }} - {{ book.book_score }}</li>
+    {% endfor %}
+  </ul> {% endcomment %}
+{% if top_books.itertuples %}
+    {% comment %} <ul> 
+        {% for book in top_books.itertuples %}
+        <li>
+            <img src="{{book.image}}">
+            <h2>{{ book.title }}</h2>
+            <p>{{ book.description }}</p>
+            <p><strong>ISBN:</strong> {{ book.isbn }}</p>
+            <p><strong>Author:</strong> {{ book.author }}</p>
+            <p><strong>Score:</strong> {{ book.book_score }}</p>
+            <a href ="/media/{{book.book_pdf}}" class = "btn btn-success">
+                Read PDF
+            </a> 
+        </li>
+        {% endfor %}
+    </ul> {% endcomment %}
+    <head>
+        <link rel="stylesheet" type = "text/css" href="{% static 'css/card.css' %}">
+    </head>
+    <div class="container">
+        <div class="row">
+    
+            {% for book in top_books.itertuples%}
+            <div class="card">
+                <a class='card-link' href="{{book.get_absolute_url}}">
+                    <img src="{{book.image}}">
+                    <div class="details">
+                        {{ book.title }}
+                        {% comment %} <h3>{{ book.description }}</h3> {% endcomment %}
+                        Author::{{ book.author }}
+                        <br>
+                        <a href ="/media/{{book.book_pdf}}" class = "btn btn-success">
+                            Read PDF
+                        </a> 
+                    </div>
+                </a>
+            </div>
+                
+            {% endfor %}
+        </div>
+    </div>
+{% else %}
+    <p>No book recommendations found.</p>
+{% endif %} 
+{% endblock %}

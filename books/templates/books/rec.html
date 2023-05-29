@@ -1,0 +1,64 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  <h1>Book Recommendations</h1>
+  <form method="post">
+    {% csrf_token %}
+    <label for="user_input">Enter book name:</label>
+    <input type="text" id="user_input" name="user_input">
+    <button type="submit">Search</button>
+  </form>
+ 
+
+
+  {% if data %}
+  <h2>Recommendations:</h2>
+    <ul>
+    {% for item in data %}
+ 
+    <img src="/media/{{ item.image}}" alt="">
+        {{ item.title }}<br>
+        average rating ={{item.avg_rating}}
+        {{ item.author }}<br>
+        {{ item.description }}<br>
+        {{ item.isbn}}<br>
+        {{ item.published_year }}<br>
+        
+       
+        
+        
+        
+        
+        
+        
+        
+        {% for review in item.reviews %}
+        <li>
+          <p><strong>Rating:</strong> {{ review.rating }}</p>
+          <p><strong>Content:</strong> {{ review.content }}</p>
+          <p><strong>Created at:</strong> {{ review.created_at }}</p>
+          <p><strong>Created by:</strong> {{ review.created_by }}</p>
+        </li>
+      {% endfor %}
+       
+    {% endfor %}
+    <form method="POST" action="{% url 'books:recommend' %}">
+      {% csrf_token %}
+      <input type="hidden" name="isbn" value="{{ item.isbn }}">
+      <label for="rating">Rating:</label>
+      <select name="rating" id="rating" required>
+        <option value="">--Choose rating--</option>
+        <option value="1">1</option>
+        <option value="2">2</option>
+        <option value="3">3</option>
+        <option value="4">4</option>
+        <option value="5">5</option>
+      </select>
+      <label for="content">Review:</label>
+      <textarea name="content" id="content" rows="4" cols="50" required></textarea>
+      <button type="submit">Submit</button>
+    </form> 
+     
+  {% endif %}
+ 
+{% endblock %}

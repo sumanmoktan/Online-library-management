@@ -1,0 +1,77 @@
+{% extends 'base.html' %}  
+{%load static%}
+
+{%block title%}Librarian Dashboard{%endblock%}
+  
+{% block content %}  
+
+		<head>
+			<!-- stylesheet -->
+			<link rel="stylesheet" type="text/css" href="{% static 'css/home.css' %}">
+		</head>
+
+<div class="container">
+	{% include './dashboard_sidebar.html' %}
+	<main>
+			<div class="insights">
+				<div class="sales">
+					<span class="material-symbols-sharp">monitoring</span>
+					<div class="middle">
+						<div class="left">
+							<h3>Total student</h3>
+							<small>Last 24 hour</small>
+						</div>
+					</div>
+				</div>
+				<!----------------------------------End of sales------------------>
+				<div class="expensis">
+					<span class="material-symbols-sharp">bar_chart</span>
+					<div class="middle">
+						<div class="left">
+							<h3>Expensis</h3>
+							<h1>$200</h1>
+							<small>last 24 hour</small>
+						</div>
+					</div>
+				</div>
+				<!------------------------------End of Expenses------------------>
+				<div class="income">
+					<span class="material-symbols-sharp">stacked_line_chart</span>
+					<div class="middle">
+						<div class="left">
+							<h3>Income</h3>
+							<h1>$2500</h1>
+							<small>last 24 hour</small>
+						</div>
+					</div>
+				</div>
+			</div>
+					<div class="card">
+            <a class='card-link' href="#">
+                    <img src="shirt.png" alt="..." />
+            <div class="card-body">
+
+                    <div class="card-title">
+                            Book Name
+                    </div>
+                    <h3 style="font-size:20px;">Author</h3>
+
+                    <h4 class='price'>Publisher</h4>
+                    </div>
+					<div class='button-wrapper'>
+						 <span class="material-symbols-sharp">star</span>
+						 <span class="material-symbols-sharp">star</span>
+						 <span class="material-symbols-sharp">star</span>
+						 <span class="material-symbols-sharp">star</span>
+						 <span class="material-symbols-sharp">star</span>
+					</div>
+                    </a>
+
+    		 </div>
+
+	</main>
+</div>
+
+
+
+{%endblock%}
